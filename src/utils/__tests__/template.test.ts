@@ -8,5 +8,7 @@ test("getTemplatePath returns correct path", () => {
 });
 
 test("loadTemplate throws error for non-existent template", async () => {
-  await expect(loadTemplate("non-existent-template")).rejects.toThrow("Template not found");
+  await expect(loadTemplate("non-existent-template")).rejects.toThrow(
+    "Template not found",
+  );
 });

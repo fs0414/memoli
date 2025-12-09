@@ -45,7 +45,12 @@ function showVersion(): void {
 }
 
 async function main(): Promise<void> {
-  if (!command || command === "help" || command === "-h" || command === "--help") {
+  if (
+    !command ||
+    command === "help" ||
+    command === "-h" ||
+    command === "--help"
+  ) {
     showHelp();
   } else if (command === "-v" || command === "--version") {
     showVersion();

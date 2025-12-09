@@ -11,6 +11,7 @@ memoli init
 ```
 
 `~/.memoli` 配下に必要なディレクトリを作成します:
+
 - `reports/` - 日報
 - `temp/` - テンプレート
 - `memo/` - 通常メモ
