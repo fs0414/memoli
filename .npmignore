@@ -1,0 +1,36 @@
+# Source files
+src/
+index.ts
+index.test.ts
+scripts/build.ts
+packages/
+dist/
+
+# Config files
+tsconfig.json
+.oxfmtrc.json
+.oxlintrc.json
+bun.lock
+mise.toml
+
+# IDE and editor
+.cursor/
+.vscode/
+.idea/
+
+# Test files
+**/*.test.ts
+**/__tests__/
+
+# Development
+node_modules/
+.env*
+*.log
+
+# Git
+.git/
+.gitignore
+
+# Claude
+CLAUDE.md
+.claude/

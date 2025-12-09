@@ -5,6 +5,7 @@ node_modules
 out
 dist
 *.tgz
+bin/memoli-binary
 
 # code coverage
 coverage
