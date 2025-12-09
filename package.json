@@ -1,0 +1,24 @@
+{
+  "name": "memoli",
+  "version": "0.0.1",
+  "type": "module",
+  "bin": {
+    "memoli": "./index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsgo --noEmit",
+    "lint": "oxlint 'src/**/*.ts' 'index.ts'",
+    "lint:fix": "oxlint 'src/**/*.ts' 'index.ts' --fix",
+    "fmt": "oxfmt",
+    "fmt:check": "oxfmt --check"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@typescript/native-preview": "^7.0.0-dev.20251209.1"
+  },
+  "dependencies": {
+    "oxfmt": "^0.17.0",
+    "oxlint": "^1.32.0",
+    "oxlint-tsgolint": "^0.8.4"
+  }
+}
