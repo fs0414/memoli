@@ -1,0 +1,28 @@
+#!/usr/bin/env node
+
+import { spawn } from "node:child_process";
+import { join, dirname } from "node:path";
+import { existsSync } from "node:fs";
+import { fileURLToPath } from "node:url";
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const BIN_PATH = join(__dirname, "memoli-binary");
+
+if (!existsSync(BIN_PATH)) {
+  console.error("Error: memoli binary not found.");
+  console.error("Please run: npm rebuild memoli");
+  process.exit(1);
+}
+
+const child = spawn(BIN_PATH, process.argv.slice(2), {
+  stdio: "inherit",
+});
+
+child.on("error", (err) => {
+  console.error(`Error: Failed to execute binary: ${err.message}`);
+  process.exit(1);
+});
+
+child.on("exit", (code) => {
+  process.exit(code ?? 0);
+});
