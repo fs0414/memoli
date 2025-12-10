@@ -1,6 +1,6 @@
 {
   "name": "@fs0414/memoli",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "CLI markdown memo manager",
   "type": "module",
   "bin": {
@@ -8,10 +8,10 @@
   },
   "files": [
     "bin",
-    "scripts/postinstall.js"
+    "scripts/postinstall.cjs"
   ],
   "scripts": {
-    "postinstall": "node scripts/postinstall.js",
+    "postinstall": "node scripts/postinstall.cjs",
     "build": "bun run scripts/build.ts",
     "typecheck": "tsgo --noEmit",
     "lint": "oxlint 'src/**/*.ts' 'index.ts'",
@@ -29,5 +29,8 @@
     "oxfmt": "^0.17.0",
     "oxlint": "^1.32.0",
     "oxlint-tsgolint": "^0.8.4"
+  },
+  "dependencies": {
+    "@fs0414/memoli": "^0.0.1"
   }
 }
