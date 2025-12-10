@@ -2,6 +2,7 @@
   "name": "@fs0414/memoli",
   "version": "0.0.2",
   "description": "CLI markdown memo manager",
+  "license": "MIT",
   "type": "module",
   "bin": {
     "memoli": "./bin/memoli"
