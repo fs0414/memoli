@@ -1,6 +1,11 @@
 #!/usr/bin/env node
 
-const { createWriteStream, chmodSync, existsSync, mkdirSync } = require("node:fs");
+const {
+  createWriteStream,
+  chmodSync,
+  existsSync,
+  mkdirSync,
+} = require("node:fs");
 const { join } = require("node:path");
 const { arch, platform } = require("node:os");
 const https = require("node:https");
@@ -35,25 +40,31 @@ function downloadFile(url, dest) {
         return;
       }
 
-      https.get(url, { headers: { "User-Agent": "memoli-installer" } }, (res) => {
-        if (res.statusCode >= 300 && res.statusCode < 400 && res.headers.location) {
-          follow(res.headers.location, redirects + 1);
-          return;
-        }
+      https
+        .get(url, { headers: { "User-Agent": "memoli-installer" } }, (res) => {
+          if (
+            res.statusCode >= 300 &&
+            res.statusCode < 400 &&
+            res.headers.location
+          ) {
+            follow(res.headers.location, redirects + 1);
+            return;
+          }
 
-        if (res.statusCode !== 200) {
-          reject(new Error(`Failed to download: ${res.statusCode}`));
-          return;
-        }
+          if (res.statusCode !== 200) {
+            reject(new Error(`Failed to download: ${res.statusCode}`));
+            return;
+          }
 
-        const file = createWriteStream(dest);
-        res.pipe(file);
-        file.on("finish", () => {
-          file.close();
-          resolve();
-        });
-        file.on("error", reject);
-      }).on("error", reject);
+          const file = createWriteStream(dest);
+          res.pipe(file);
+          file.on("finish", () => {
+            file.close();
+            resolve();
+          });
+          file.on("error", reject);
+        })
+        .on("error", reject);
     };
 
     follow(url);
