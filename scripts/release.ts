@@ -2,6 +2,7 @@
 
 import { $ } from "bun";
 import { mkdir } from "node:fs/promises";
+import { createHash } from "node:crypto";
 
 const targets = [
   { name: "darwin-x64", target: "bun-darwin-x64" },
@@ -13,9 +14,11 @@ const targets = [
 const entrypoint = "./index.ts";
 const distDir = "./dist";
 
-console.log("Building memoli binaries for GitHub Releases...\n");
+console.log("Building memoli binaries for release...\n");
 
 await mkdir(distDir, { recursive: true });
+
+const checksums: Record<string, string> = {};
 
 for (const { name, target } of targets) {
   const outfile = `${distDir}/memoli-${name}`;
@@ -23,9 +26,18 @@ for (const { name, target } of targets) {
 
   await $`bun build ${entrypoint} --compile --minify --target ${target} --outfile ${outfile}`;
 
-  console.log(`  -> ${outfile}\n`);
+  // Calculate SHA256
+  const file = Bun.file(outfile);
+  const buffer = await file.arrayBuffer();
+  const hash = createHash("sha256").update(Buffer.from(buffer)).digest("hex");
+  checksums[name] = hash;
+
+  console.log(`  -> ${outfile}`);
+  console.log(`  -> SHA256: ${hash}\n`);
 }
 
-console.log("Build complete!");
-console.log(`\nBinaries are in ${distDir}/`);
-console.log("Upload these to GitHub Releases with tag v<version>");
+console.log("Build complete!\n");
+console.log("=== SHA256 Checksums for Homebrew Formula ===\n");
+for (const [name, hash] of Object.entries(checksums)) {
+  console.log(`${name}: ${hash}`);
+}

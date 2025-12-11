@@ -14,6 +14,7 @@
   "scripts": {
     "postinstall": "node scripts/postinstall.cjs",
     "build": "bun run scripts/build.ts",
+    "release": "bun run scripts/release.ts",
     "typecheck": "tsgo --noEmit",
     "lint": "oxlint 'src/**/*.ts' 'index.ts'",
     "lint:fix": "oxlint 'src/**/*.ts' 'index.ts' --fix",

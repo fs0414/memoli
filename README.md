@@ -52,16 +52,22 @@ memoli --version
 - **Linter**: oxlint
 - **Formatter**: oxfmt
 
-## その他情報
+## インストール
 
-### インストール
+### Homebrew (macOS / Linux)
 
 ```bash
-bun install
-bun link  # グローバルにインストール
+brew tap fs0414/memoli
+brew install memoli
 ```
 
-### 開発
+### npm
+
+```bash
+npm install -g @fs0414/memoli
+```
+
+## 開発
 
 ```bash
 bun run typecheck   # 型チェック
