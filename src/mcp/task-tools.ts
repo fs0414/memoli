@@ -34,20 +34,27 @@ const taskAddTool: ToolEntry = {
         title: { type: "string", description: "Task title" },
         priority: { type: "string", enum: ["high", "medium", "low"] },
         tags: { type: "array", items: { type: "string" } },
-        scheduledDate: { type: "string", description: "Day to work on this task (YYYY-MM-DD). Default to today." },
+        scheduledDate: {
+          type: "string",
+          description:
+            "Day to work on this task (YYYY-MM-DD). Default to today.",
+        },
         memo: { type: "string", description: "Linked memo name" },
-        parent: { type: "string", description: "Parent task (title keyword or ID)" },
+        parent: {
+          type: "string",
+          description: "Parent task (title keyword or ID)",
+        },
       },
       required: ["title"],
     },
   },
   handler: async (args) => {
-    const title = asString(args["title"]);
+    const title = asString(args.title);
     if (title === "") {
       return errorResult("title is required");
     }
     const options = parseTaskAddOptions(args);
-    const parentQuery = asString(args["parent"]);
+    const parentQuery = asString(args.parent);
     if (parentQuery !== "") {
       const resolved = await resolveTaskId(parentQuery);
       if (!resolved.ok) {
@@ -77,7 +84,10 @@ const taskListTool: ToolEntry = {
           description: "Filter by status",
         },
         tag: { type: "string", description: "Filter by tag" },
-        date: { type: "string", description: "Filter by scheduled date (YYYY-MM-DD)" },
+        date: {
+          type: "string",
+          description: "Filter by scheduled date (YYYY-MM-DD)",
+        },
       },
     },
   },
@@ -131,10 +141,7 @@ const handleTaskUpdate = async (
   args: Record<string, unknown>,
 ): Promise<McpCallToolResult> => {
   const query = resolveQuery(args);
-  const statusResult = await handleStatusUpdate(
-    query,
-    asString(args["status"]),
-  );
+  const statusResult = await handleStatusUpdate(query, asString(args.status));
   if (statusResult !== undefined) {
     return statusResult;
   }
@@ -166,7 +173,10 @@ const taskUpdateTool: ToolEntry = {
         },
         priority: { type: "string", enum: ["high", "medium", "low"] },
         tags: { type: "array", items: { type: "string" } },
-        scheduledDate: { type: "string", description: "Day to work on this task (YYYY-MM-DD)" },
+        scheduledDate: {
+          type: "string",
+          description: "Day to work on this task (YYYY-MM-DD)",
+        },
         memo: { type: "string", description: "Link to memo file" },
         parent: {
           type: "string",
@@ -232,12 +242,14 @@ const taskTreeTool: ToolEntry = {
         tag: { type: "string", description: "Filter by tag" },
         date: {
           type: "string",
-          description: "Target date (YYYY-MM-DD). Required when scope is 'day'.",
+          description:
+            "Target date (YYYY-MM-DD). Required when scope is 'day'.",
         },
         scope: {
           type: "string",
           enum: ["day"],
-          description: "Scope filter. 'day': shows tasks scheduled for date + in-progress (doing).",
+          description:
+            "Scope filter. 'day': shows tasks scheduled for date + in-progress (doing).",
         },
         format: {
           type: "string",
@@ -249,7 +261,7 @@ const taskTreeTool: ToolEntry = {
   },
   handler: async (args) => {
     const filter = parseTaskFilter(args);
-    if (asString(args["format"]) === "json") {
+    if (asString(args.format) === "json") {
       return jsonResult(await listTaskTree(filter));
     }
     return textResult(formatTreeText(await listTasks(filter)));

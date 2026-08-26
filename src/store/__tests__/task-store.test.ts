@@ -1,8 +1,7 @@
 import { execFile } from "node:child_process";
 import { mkdtemp, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
-import { dirname, join } from "node:path";
-import { fileURLToPath } from "node:url";
+import { join } from "node:path";
 import { promisify } from "node:util";
 
 import { afterAll, beforeAll, describe, expect, test } from "vitest";
@@ -10,7 +9,7 @@ import { afterAll, beforeAll, describe, expect, test } from "vitest";
 import type { Task } from "../types.ts";
 
 const execFileAsync = promisify(execFile);
-const currentDir = dirname(fileURLToPath(import.meta.url));
+const currentDir = import.meta.dirname;
 const CLI_PATH = join(currentDir, "..", "..", "..", "index.ts");
 
 const ID_LENGTH = 8;

@@ -74,8 +74,10 @@ const buildDetailLines = (task: Task): string[] => {
 
 export const formatTaskDetail = (task: Task): string => {
   const lines = buildDetailLines(task);
-  lines.push(`${"Created:".padEnd(LABEL_PAD)}${task.createdAt}`);
-  lines.push(`${"Updated:".padEnd(LABEL_PAD)}${task.updatedAt}`);
+  lines.push(
+    `${"Created:".padEnd(LABEL_PAD)}${task.createdAt}`,
+    `${"Updated:".padEnd(LABEL_PAD)}${task.updatedAt}`,
+  );
   return lines.join("\n");
 };
 

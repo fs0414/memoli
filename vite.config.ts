@@ -36,8 +36,11 @@ export default defineConfig({
       {
         files: ["*.test.ts"],
         rules: {
+          "init-declarations": "off",
           "max-lines-per-function": "off",
+          "no-magic-numbers": "off",
           "typescript/no-unsafe-type-assertion": "off",
+          "typescript/strict-void-return": "off",
         },
       },
       {
@@ -112,6 +115,7 @@ export default defineConfig({
 
       // Off: incompatible as shared baseline
       "capitalized-comments": "off",
+      "one-var": "off",
       "import/exports-last": "off",
       "import/group-exports": "off",
       "import/no-named-export": "off",
@@ -121,6 +125,9 @@ export default defineConfig({
       "no-ternary": "off",
       "sort-imports": "off",
       "sort-keys": "off",
+      "typescript/prefer-readonly-parameter-types": "off",
+      // Valibot schemas are clearer when their combinators stay inline.
+      "unicorn/max-nested-calls": "off",
     },
   },
   test: {

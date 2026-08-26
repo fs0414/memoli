@@ -46,19 +46,19 @@ export const resolveParentEdge = async (
   args: Record<string, unknown>,
   updates: Record<string, unknown>,
 ): Promise<McpCallToolResult | undefined> => {
-  const parentQuery = asString(args["parent"]);
+  const parentQuery = asString(args.parent);
   if (parentQuery === "") {
     return undefined;
   }
   if (parentQuery === "none") {
-    updates["parentId"] = undefined;
+    updates.parentId = undefined;
     return undefined;
   }
   const resolved = await resolveTaskId(parentQuery);
   if (!resolved.ok) {
     return resolved.error;
   }
-  updates["parentId"] = resolved.value;
+  updates.parentId = resolved.value;
   return undefined;
 };
 
@@ -66,7 +66,7 @@ export const resolveBlockedByEdge = async (
   args: Record<string, unknown>,
   updates: Record<string, unknown>,
 ): Promise<McpCallToolResult | undefined> => {
-  const blockers = asStringArray(args["blockedBy"]);
+  const blockers = asStringArray(args.blockedBy);
   if (blockers === undefined || blockers.length === 0) {
     return undefined;
   }
@@ -74,7 +74,7 @@ export const resolveBlockedByEdge = async (
   if (!resolved.ok) {
     return resolved.error;
   }
-  updates["blockedBy"] = resolved.value;
+  updates.blockedBy = resolved.value;
   return undefined;
 };
 

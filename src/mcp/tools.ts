@@ -29,7 +29,7 @@ const dailyReadTool: ToolEntry = {
     },
   },
   handler: async (args) => {
-    const rawDate = asString(args["date"]);
+    const rawDate = asString(args.date);
     const dateStr = rawDate === "" ? getTodayDateStr() : rawDate;
     const filePath = getTodayFilePath();
     const file = Bun.file(
@@ -58,7 +58,7 @@ const memoReadTool: ToolEntry = {
     },
   },
   handler: async (args) => {
-    const name = asString(args["name"]);
+    const name = asString(args.name);
     const filePath = join(MEMO_DIR, `${name}.md`);
     const file = Bun.file(filePath);
     if (!(await file.exists())) {
@@ -82,7 +82,7 @@ const memoListTool: ToolEntry = {
     }
     const files = readdirSync(MEMO_DIR)
       .filter((file) => file.endsWith(".md"))
-      .map((file) => file.replace(/\.md$/, ""));
+      .map((file) => file.replace(/\.md$/u, ""));
     return jsonResult({ memos: files });
   },
 };

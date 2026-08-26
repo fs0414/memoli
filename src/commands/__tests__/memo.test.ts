@@ -1,10 +1,9 @@
 import { spawn } from "node:child_process";
-import { dirname, join } from "node:path";
-import { fileURLToPath } from "node:url";
+import { join } from "node:path";
 
 import { expect, test } from "vitest";
 
-const currentDir = dirname(fileURLToPath(import.meta.url));
+const currentDir = import.meta.dirname;
 const CLI_PATH = join(currentDir, "../../../index.ts");
 
 const EXIT_FAILURE = 1;

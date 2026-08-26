@@ -20,7 +20,7 @@ const TEST_DAY = 9;
 
 test("getTodayDateStr returns YYYY-MM-DD format", () => {
   const result = getTodayDateStr();
-  expect(result).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+  expect(result).toMatch(/^\d{4}-\d{2}-\d{2}$/u);
 });
 
 test("getTodayDateStr returns today's date", () => {
@@ -32,7 +32,7 @@ test("getTodayDateStr returns today's date", () => {
 
 test("getMonthDirName returns YYYY-MM format", () => {
   const result = getMonthDirName();
-  expect(result).toMatch(/^\d{4}-\d{2}$/);
+  expect(result).toMatch(/^\d{4}-\d{2}$/u);
 });
 
 test("getMonthDirName returns current month", () => {

@@ -58,7 +58,7 @@ const extractDateParts = (match: RegExpMatchArray): DateParts | undefined => {
 };
 
 export const parseDateStr = (dateStr: string): Date | undefined => {
-  const match = dateStr.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+  const match = /^(?<year>\d{4})-(?<month>\d{2})-(?<day>\d{2})$/u.exec(dateStr);
   if (match === null) {
     return undefined;
   }
@@ -90,7 +90,7 @@ export const getMonthDirName = (): string => {
 };
 
 export const isValidDateStr = (dateStr: string): boolean => {
-  if (!/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) {
+  if (!/^\d{4}-\d{2}-\d{2}$/u.test(dateStr)) {
     return false;
   }
   return parseDateStr(dateStr) !== undefined;
@@ -122,7 +122,10 @@ export const getRangeFileName = (startDate: string, endDate: string): string =>
 export const parseRangeFileName = (
   fileName: string,
 ): { start: string; end: string } | undefined => {
-  const match = fileName.match(/^(\d{4}-\d{2}-\d{2})_(\d{4}-\d{2}-\d{2})\.md$/);
+  const match =
+    /^(?<start>\d{4}-\d{2}-\d{2})_(?<end>\d{4}-\d{2}-\d{2})\.md$/u.exec(
+      fileName,
+    );
   if (match === null) {
     return undefined;
   }

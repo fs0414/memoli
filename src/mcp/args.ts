@@ -50,8 +50,8 @@ const TaskUpdateArgsSchema = v.object({
 
 /** Resolve query string — falls back to `id` param if `query` is empty */
 export const resolveQuery = (args: Args): string => {
-  const query = asString(args["query"]);
-  return query === "" ? asString(args["id"]) : query;
+  const query = asString(args.query);
+  return query === "" ? asString(args.id) : query;
 };
 
 export const parseTaskAddOptions = (args: Args): TaskAddOptions =>

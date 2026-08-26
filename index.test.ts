@@ -1,12 +1,11 @@
 import { execFile, spawn } from "node:child_process";
-import { dirname, join } from "node:path";
-import { fileURLToPath } from "node:url";
+import { join } from "node:path";
 import { promisify } from "node:util";
 
 import { expect, test } from "vitest";
 
 const execFileAsync = promisify(execFile);
-const currentDir = dirname(fileURLToPath(import.meta.url));
+const currentDir = import.meta.dirname;
 const CLI_PATH = join(currentDir, "index.ts");
 
 test("--help shows help message", async () => {

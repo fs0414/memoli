@@ -18,5 +18,5 @@ test("getTodayFilePath ends with .md", () => {
 test("getMonthDirPath returns reports/YYYY-MM", () => {
   const result = getMonthDirPath();
   expect(result).toContain("reports");
-  expect(result).toMatch(/\d{4}-\d{2}$/);
+  expect(result).toMatch(/\d{4}-\d{2}$/u);
 });

@@ -26,10 +26,10 @@
     "fmt:check": "NODE_OPTIONS='--experimental-strip-types --no-warnings' vp fmt --check"
   },
   "dependencies": {
-    "valibot": "^1.3.1"
+    "valibot": "^1.4.2"
   },
   "devDependencies": {
-    "@types/bun": "latest",
-    "vite-plus": "^0.1.11"
+    "@types/bun": "1.4.0",
+    "vite-plus": "^0.3.0"
   }
 }

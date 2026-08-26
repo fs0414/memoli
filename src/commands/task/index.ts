@@ -265,10 +265,12 @@ const isHelpRequest = (args: string[]): boolean =>
 
 const resolveHandler = (
   filteredArgs: string[],
-): {
-  handler: (args: string[], json: boolean) => Promise<void>;
-  args: string[];
-} | undefined => {
+):
+  | {
+      handler: (args: string[], json: boolean) => Promise<void>;
+      args: string[];
+    }
+  | undefined => {
   const [subcommand, ...subArgs] = filteredArgs;
   if (subcommand === undefined || subcommand.startsWith("-")) {
     return { handler: handleList, args: filteredArgs };

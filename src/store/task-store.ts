@@ -138,7 +138,7 @@ export const updateTaskStatus = (
   withStoreMutation((store) => {
     const task = findTask(store, query);
     if (task === undefined) {
-      return;
+      return undefined;
     }
     const now = new Date().toISOString();
     task.status = status;
@@ -162,7 +162,7 @@ export const updateTask = (
   withStoreMutation((store) => {
     const task = findTask(store, query);
     if (task === undefined) {
-      return;
+      return undefined;
     }
     if (
       updates.parentId !== undefined &&
@@ -179,7 +179,7 @@ export const removeTask = (query: string): Promise<Task | undefined> =>
   withStoreMutation((store) => {
     const task = findTask(store, query);
     if (task === undefined) {
-      return;
+      return undefined;
     }
     // Reparent children to the removed task's parent (or root)
     for (const item of store.tasks) {
@@ -200,15 +200,10 @@ export const removeTask = (query: string): Promise<Task | undefined> =>
 
 const applyDayScope = (tasks: Task[], date: string): Task[] =>
   tasks.filter(
-    (task) =>
-      task.scheduledDate === date ||
-      task.status === "doing",
+    (task) => task.scheduledDate === date || task.status === "doing",
   );
 
-const applyDateFilter = (
-  tasks: Task[],
-  filter: TaskFilter,
-): Task[] => {
+const applyDateFilter = (tasks: Task[], filter: TaskFilter): Task[] => {
   if (filter.scope === "day" && filter.date !== undefined) {
     return applyDayScope(tasks, filter.date);
   }
